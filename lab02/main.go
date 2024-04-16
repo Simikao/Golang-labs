@@ -30,10 +30,6 @@ func NewFactorial() *Factorial {
 	return tmp
 }
 
-func pseudoFactorial(number *big.Int) *big.Int {
-	return number.Mul(number.Add(number, bigIntOne), number)
-}
-
 func isStrongNumber(bigNumber *Factorial, nick string) bool {
 	found := true
 	for _, char := range nick {

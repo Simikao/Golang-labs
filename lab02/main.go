@@ -6,7 +6,20 @@ import (
 	"strings"
 )
 
-var bigIntOne = big.NewInt(int64(1))
+var (
+	bigIntOne = big.NewInt(int64(1))
+	replacer  = strings.NewReplacer(
+		"ą", "a",
+		"ć", "c",
+		"ę", "e",
+		"ł", "l",
+		"ń", "n",
+		"ó", "o",
+		"ś", "s",
+		"ź", "z",
+		"ż", "z",
+	)
+)
 
 type Person struct {
 	Name     string
@@ -52,9 +65,9 @@ func findStrongNumber(nick string) *Factorial {
 }
 
 func main() {
-	me := Person{"Pioterl", "Arlenski"}
-	nick := string(strings.ToLower(me.Name[0:3]))
-	nick += string(strings.ToLower(me.LastName[0:3]))
+	me := Person{"Pioterl", "Arłenski"}
+	nick := string(strings.ToLower(replacer.Replace(me.Name)[0:3]))
+	nick += string(strings.ToLower(replacer.Replace(me.LastName)[0:3]))
 	fmt.Println(nick)
 	result := findStrongNumber(nick)
 	fmt.Printf("For the name %s %s, whose nick is %q, the strong number is %d\n", me.Name, me.LastName, nick, result.iteration)

@@ -125,12 +125,11 @@ func main() {
 	arr := make([]int, 31)
 	fibonacci(30, &arr)
 
-	weakNumberR := findWeakNumber(result.iteration, &arr)
-	weakNumber := len(arr) - weakNumberR
-	if weakNumberR < 0 {
+	weakNumber := findWeakNumber(result.iteration, &arr)
+	if weakNumber < 0 {
 		fmt.Println("Something went wrong")
 	} else {
-		fmt.Printf("Weak number for %s %s is %d and it was called %d times in the recursive fibonacci function (from number 30)\n", user.Name, user.LastName, weakNumber, arr[weakNumberR])
+		fmt.Printf("Weak number for %s %s is %d and it was called %d times in the recursive fibonacci function (from number 30)\n", user.Name, user.LastName, weakNumber, arr[weakNumber])
 	}
 
 }

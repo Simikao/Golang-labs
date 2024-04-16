@@ -46,30 +46,20 @@ func isStrongNumber(bigNumber *Factorial, nick string) bool {
 	return found
 }
 
-func findStrongNumber(nick string) {
+func findStrongNumber(nick string) *Factorial {
 	number := NewFactorial()
 	for !isStrongNumber(number, nick) {
 		number.next()
 	}
 
+	return number
 }
 
 func main() {
-	me := Person{"John", "Doe"}
+	me := Person{"Pioterl", "Arlenski"}
 	nick := string(strings.ToLower(me.Name[0:3]))
 	nick += string(strings.ToLower(me.LastName[0:3]))
 	fmt.Println(nick)
-	test := NewFactorial()
-	fmt.Println(bigIntOne)
-	fmt.Println(test.iteration, test.value)
-	for !isStrongNumber(test, nick) {
-		test.next()
-	}
-	fmt.Println(test.iteration, test.value)
-
-	test2 := NewFactorial()
-	for !isStrongNumber(test2, "pioarl") {
-		test2.next()
-	}
-	fmt.Println(test2.iteration, test.value)
+	result := findStrongNumber(nick)
+	fmt.Printf("For the name %s %s, whose nick is %q, the strong number is %d\n", me.Name, me.LastName, nick, result.iteration)
 }

@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math/big"
+	"os"
 	"strings"
 )
 
@@ -18,6 +20,7 @@ var (
 		"ś", "s",
 		"ź", "z",
 		"ż", "z",
+		"\n", "",
 	)
 )
 
@@ -78,31 +81,56 @@ func abs(x int) int {
 	return x
 }
 
-func findWeakNumber(strongNumber int64, arr *[]int) {
+func findWeakNumber(strongNumber int64, arr *[]int) int {
 	intSN := int(strongNumber)
 	difference := abs(intSN - (*arr)[len(*arr)-1])
 	for i := (len(*arr) - 1); i >= 0; i-- {
-		fmt.Println(intSN, " - ", (*arr)[i], " = ", intSN-(*arr)[i])
-		n := (*arr)[i]
-		if abs(intSN-n) < difference {
-			difference = abs(intSN - n)
+		newDifference := abs(intSN - (*arr)[i])
+		if newDifference <= difference {
+			difference = newDifference
 		} else {
-
+			return i + 1
 		}
 	}
-	fmt.Println(len(*arr), intSN)
+	return -1
 }
 func main() {
-	me := Person{"Pioterl", "Arłenski"}
-	nick := string(strings.ToLower(replacer.Replace(me.Name)[0:3]))
-	nick += string(strings.ToLower(replacer.Replace(me.LastName)[0:3]))
-	fmt.Println(nick)
+
+	reader := bufio.NewReader(os.Stdin)
+
+	fmt.Print("Enter first name: ")
+	name, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println(err)
+		panic("Something went wrong, check your input and try again")
+	}
+	name = strings.Replace(name, "\n", "", -1)
+
+	fmt.Print("Enter last name: ")
+	lastName, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println(err)
+		panic("Something went wrong, check your input and try again")
+	}
+	lastName = strings.Replace(lastName, "\n", "", -1)
+
+	user := Person{name, lastName}
+
+	nick := string(strings.ToLower(replacer.Replace(user.Name)[0:3]))
+	nick += string(strings.ToLower(replacer.Replace(user.LastName)[0:3]))
+
 	result := findStrongNumber(nick)
-	fmt.Printf("For the name %s %s, whose nick is %q, the strong number is %d\n", me.Name, me.LastName, nick, result.iteration)
+	fmt.Printf("For the name %s %s, whose nick is %q, the strong number is %d\n", user.Name, user.LastName, nick, result.iteration)
 
 	arr := make([]int, 31)
 	fibonacci(30, &arr)
-	fmt.Println(arr)
 
-	findWeakNumber(result.iteration, &arr)
+	weakNumberR := findWeakNumber(result.iteration, &arr)
+	weakNumber := len(arr) - weakNumberR
+	if weakNumberR < 0 {
+		fmt.Println("Something went wrong")
+	} else {
+		fmt.Printf("Weak number for %s %s is %d and it was called %d times in the recursive fibonacci function (from number 30)\n", user.Name, user.LastName, weakNumber, arr[weakNumberR])
+	}
+
 }

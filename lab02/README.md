@@ -161,7 +161,7 @@ func main() {
 # Fibonacci
 
 Po wykonaniu pierwszych 55 wrazów ciągu Fibonacciego użyłem programu excel by wyestymować dalsze wyniki (używając funkcji `GROWTH`). Jak widać czas potrzebny do obliczenia zaczyna od razu gwałtownie wzrastać. Jak pierwsze 40 wyrazów mieści się w poniżej sekundy następne pięć już zajmuje 5 sekund. Według moich wyliczeń 85 ciągu przekracza nawet najbardziej optymistycznie długość życia człowieka.
-Już przy 100 sięgamy bardzo abstrakcyjnych lat także na pewno nikt by się nie doczekał na wyliczenie fibonacciego z silnej liczby.
+Już przy 100 sięgamy bardzo abstrakcyjnych lat także na pewno nikt by się nie doczekał na wyliczenie Fibonacciego z silnej liczby.
 
 | Wyraz ciągu | Czas (różne jednoski) |
 |:-----------:|-----------------------|
@@ -186,3 +186,12 @@ Już przy 100 sięgamy bardzo abstrakcyjnych lat także na pewno nikt by się ni
 | 100         | 560.04milenia         |
 
 ![Fibonacci](https://i.ibb.co/D9gFbm3/Fibonacci-graph.png "Estimation")
+
+# Ackermann
+
+`ackermann(4,0)` wykonał się w 213 nanosekund
+`ackermann(4,1)` wykonał się w około 13 sekund
+`ackermann(4,2)` nie wykonał się nawet po 40 minutach
+
+Już na podstawie tych wyników można zauważyć, że skoki czasowe pomiędzy pojedyńczymi zmianami są ogromne i dużo większe od różnic pomiędzy pojedyńczymi wyrazami ciągu Fibonacciego, zwłaszcza jeśli zauważymy, że jak zwiększymy pierwszy parametr w funcji `ackermann` to te różnice robią się jeszcze większe.
+Biorąc pod uwagę jak skomplikowane jest tempo wzrostu tej funcji nawet najprostsze parametry mogą trwać już latami, nie mówiąc już o parametrach (288, 17), które mogą trwać miliony terasekund jak nie więcej.

@@ -10,9 +10,9 @@ import (
 )
 
 var (
-	debugMode     = true
+	debugMode     = false
 	fibbonaciTime = false
-	ackermannDo   = true
+	ackermannDo   = false
 	bigIntOne     = big.NewInt(int64(1))
 	replacer      = strings.NewReplacer(
 		"ą", "a",
@@ -132,12 +132,23 @@ func getName() (string, string) {
 
 }
 
+func ackermann(m, n int) int {
+
+	if m == 0 {
+		return n + 1
+	} else if n == 0 {
+		return ackermann(m-1, 1)
+	} else {
+		return ackermann(m-1, ackermann(m, n-1))
+	}
+}
+
 func main() {
 
 	var name string
 	var lastName string
 
-	if debugMode {
+	if !debugMode {
 		name, lastName = getName()
 	} else {
 
@@ -173,6 +184,79 @@ func main() {
 		fmt.Println("45", timeFunction(45, fibonacci))
 		fmt.Println("50", timeFunction(50, fibonacci))
 		fmt.Println("55", timeFunction(55, fibonacci))
+	}
+
+	if ackermannDo {
+
+		startTime := time.Now()
+		num := ackermann(0, 0)
+		stopTime := time.Now()
+		end := stopTime.Sub(startTime).String()
+		fmt.Println("ack 0,0 took ", end, " time")
+		fmt.Println("result: ", num)
+
+		startTime = time.Now()
+		num = ackermann(0, 1)
+		stopTime = time.Now()
+		end = stopTime.Sub(startTime).String()
+		fmt.Println("ack 0,1 took ", end, " time")
+		fmt.Println("result: ", num)
+
+		startTime = time.Now()
+		num = ackermann(1, 0)
+		stopTime = time.Now()
+		end = stopTime.Sub(startTime).String()
+		fmt.Println("ack 1,0 took ", end, " time")
+		fmt.Println("result: ", num)
+
+		startTime = time.Now()
+		num = ackermann(1, 1)
+		stopTime = time.Now()
+		end = stopTime.Sub(startTime).String()
+		fmt.Println("ack 1,1 took ", end, " time")
+		fmt.Println("result: ", num)
+
+		startTime = time.Now()
+		num = ackermann(1, 2)
+		stopTime = time.Now()
+		end = stopTime.Sub(startTime).String()
+		fmt.Println("ack 1,2 took ", end, " time")
+		fmt.Println("result: ", num)
+
+		startTime = time.Now()
+		num = ackermann(2, 2)
+		stopTime = time.Now()
+		end = stopTime.Sub(startTime).String()
+		fmt.Println("ack 2,2 took ", end, " time")
+		fmt.Println("result: ", num)
+
+		startTime = time.Now()
+		num = ackermann(3, 2)
+		stopTime = time.Now()
+		end = stopTime.Sub(startTime).String()
+		fmt.Println("ack 3,2 took ", end, " time")
+		fmt.Println("result: ", num)
+
+		startTime = time.Now()
+		num = ackermann(4, 0)
+		stopTime = time.Now()
+		end = stopTime.Sub(startTime).String()
+		fmt.Println("ack 4,0 took ", end, " time")
+		fmt.Println("result: ", num)
+
+		startTime = time.Now()
+		num = ackermann(4, 1)
+		stopTime = time.Now()
+		end = stopTime.Sub(startTime).String()
+		fmt.Println("ack 4,1 took ", end, " time")
+		fmt.Println("result: ", num)
+
+		startTime = time.Now()
+		num = ackermann(4, 2)
+		stopTime = time.Now()
+		end = stopTime.Sub(startTime).String()
+		fmt.Println("ack 4,2 took ", end, " time")
+		fmt.Println("result: ", num)
 	}
 
 }

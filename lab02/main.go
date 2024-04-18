@@ -6,11 +6,15 @@ import (
 	"math/big"
 	"os"
 	"strings"
+	"time"
 )
 
 var (
-	bigIntOne = big.NewInt(int64(1))
-	replacer  = strings.NewReplacer(
+	debugMode     = true
+	fibbonaciTime = false
+	ackermannDo   = true
+	bigIntOne     = big.NewInt(int64(1))
+	replacer      = strings.NewReplacer(
 		"ą", "a",
 		"ć", "c",
 		"ę", "e",
@@ -94,7 +98,17 @@ func findWeakNumber(strongNumber int64, arr *[]int) int {
 	}
 	return -1
 }
-func main() {
+
+func timeFunction(number int, function func(int, *[]int) int) string {
+	slice := make([]int, number+1)
+	startTime := time.Now()
+	function(number, &slice)
+	stopTime := time.Now()
+
+	return stopTime.Sub(startTime).String()
+}
+
+func getName() (string, string) {
 
 	reader := bufio.NewReader(os.Stdin)
 
@@ -114,6 +128,22 @@ func main() {
 	}
 	lastName = strings.Replace(lastName, "\n", "", -1)
 
+	return name, lastName
+
+}
+
+func main() {
+
+	var name string
+	var lastName string
+
+	if debugMode {
+		name, lastName = getName()
+	} else {
+
+		name = "Piorun"
+		lastName = "Arłeński"
+	}
 	user := Person{name, lastName}
 
 	nick := string(strings.ToLower(replacer.Replace(user.Name)[0:3]))
@@ -130,6 +160,19 @@ func main() {
 		fmt.Println("Something went wrong")
 	} else {
 		fmt.Printf("Weak number for %s %s is %d and it was called %d times in the recursive fibonacci function (from number 30)\n", user.Name, user.LastName, weakNumber, arr[weakNumber])
+	}
+
+	if fibbonaciTime {
+		fmt.Println("10", timeFunction(10, fibonacci))
+		fmt.Println("15", timeFunction(15, fibonacci))
+		fmt.Println("20", timeFunction(20, fibonacci))
+		fmt.Println("25", timeFunction(25, fibonacci))
+		fmt.Println("30", timeFunction(30, fibonacci))
+		fmt.Println("35", timeFunction(35, fibonacci))
+		fmt.Println("40", timeFunction(40, fibonacci))
+		fmt.Println("45", timeFunction(45, fibonacci))
+		fmt.Println("50", timeFunction(50, fibonacci))
+		fmt.Println("55", timeFunction(55, fibonacci))
 	}
 
 }

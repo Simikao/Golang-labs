@@ -153,3 +153,36 @@ func main() {
 # Przykładowy output dla znanej już wartości z zdania
 
 ![Example](https://i.ibb.co/rZ17Ht4/image.png "example output")
+
+
+
+## Czas działania 
+
+# Fibonacci
+
+Po wykonaniu pierwszych 55 wrazów ciągu Fibonacciego użyłem programu excel by wyestymować dalsze wyniki (używając funkcji `GROWTH`). Jak widać czas potrzebny do obliczenia zaczyna od razu gwałtownie wzrastać. Jak pierwsze 40 wyrazów mieści się w poniżej sekundy następne pięć już zajmuje 5 sekund. Według moich wyliczeń 85 ciągu przekracza nawet najbardziej optymistycznie długość życia człowieka.
+Już przy 100 sięgamy bardzo abstrakcyjnych lat także na pewno nikt by się nie doczekał na wyliczenie fibonacciego z silnej liczby.
+
+| Wyraz ciągu | Czas (różne jednoski) |
+|:-----------:|-----------------------|
+| 10          | 0.000397ms            |
+| 15          | 0.003369ms            |
+| 20          | 0.035387ms            |
+| 25          | 0.390588ms            |
+| 30          | 4.482685ms            |
+| 35          | 43.896542ms           |
+| 40          | 485.063651ms          |
+| 45          | 5.5418s               |
+| 50          | 12.40m                |
+| 55          | 1.99h                 |
+| 60          | 22.75h                |
+| 65          | 10.49dni              |
+| 70          | 115.57dni             |
+| 75          | 3.49lata              |
+| 80          | 39.07lata             |
+| 85          | 428.10lata            |
+| 90          | 4.66milenia           |
+| 95          | 50.86milenia          |
+| 100         | 560.04milenia         |
+
+![Fibonacci](https://i.ibb.co/D9gFbm3/Fibonacci-graph.png "Estimation")
